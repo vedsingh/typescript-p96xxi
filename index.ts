@@ -94,3 +94,32 @@ document.writeln(
 //Type Assertion
 const typeAssertionBool = <string>true;
 document.writeln('typeAssertionBool=' + typeAssertionBool);
+
+//Literal Types and non-Literal Types to control what values can be passed
+//TypeGaurd with objects - works for both type and interface - PointInterface could be PointType
+function addNumPointInterface3(xx: PointInterface | PointInterface2 | 30) {
+  if (typeof xx == 'object') {
+    if ((<PointInterface2>xx).z) {
+      let zz = <PointInterface2>xx;
+      return zz.x + zz.y - zz.z;
+    } else {
+      let zz = <PointInterface>xx;
+      return zz.x + zz.y;
+    }
+  } else {
+    return xx;
+  }
+}
+document.writeln(
+  'Literal Types addNumPointInterface3({x:30,y:20}=' +
+    addNumPointInterface3({ x: 30, y: 20 })
+);
+document.writeln(
+  'Literal Types addNumPointInterface3({x:30,y:20,z:5}=' +
+    addNumPointInterface3({ x: 30, y: 20, z: 5 })
+);
+document.writeln(
+  'Literal Types addNumPointInterface3(400}=' + addNumPointInterface3(30)
+);
+
+document.writeln('T');

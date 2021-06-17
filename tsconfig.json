@@ -1,5 +1,8 @@
 {
   "compilerOptions": {
-    "target": "esnext"
+    "target": "esnext",
+    "noImplicitAny": true,
+    "strictNullChecks": true,
+    "noEmitOnError": false
   }
 }

@@ -99,7 +99,8 @@ document.writeln('typeAssertionBool=' + typeAssertionBool);
 //TypeGaurd with objects - works for both type and interface - PointInterface could be PointType
 function addNumPointInterface3(xx: PointInterface | PointInterface2 | 30) {
   if (typeof xx == 'object') {
-    if ((<PointInterface2>xx).z) {
+    //if ((<PointInterface2>xx).z) {.  // either this syntax or in syntax of next line -
+    if ('z' in xx) {
       let zz = <PointInterface2>xx;
       return zz.x + zz.y - zz.z;
     } else {
@@ -122,4 +123,28 @@ document.writeln(
   'Literal Types addNumPointInterface3(400}=' + addNumPointInterface3(30)
 );
 
-document.writeln('T');
+//Truthiness narrowing syntax - if (numA) or if (str)
+function truthi(numA: number, str1: string) {
+  var xx = '';
+  if (numA) xx += 'numA=' + numA;
+  else xx += 'numA=null';
+  xx += ' Boolean(numA)' + Boolean(numA) + ' !!numA=' + !!numA;
+  if (str1) xx += 'str1=' + str1;
+  else xx += 'str1=null';
+  xx += ' Boolean(str1)' + Boolean(str1) + ' !!str1=' + !!str1;
+
+  return xx;
+}
+
+document.writeln('narrowing=' + truthi());
+document.writeln('narrowing=' + truthi(30));
+document.writeln('narrowing=' + truthi('ved'));
+document.writeln('narrowing=' + truthi(30, 'ved'));
+
+//narrowing based on assignments
+let x = Math.random() < 0.5 ? 20 : 'Hello';
+document.writeln(
+  'assignment narrowing=' + (typeof x === 'number' ? x * 10 : x.toUpperCase())
+);
+
+document.writeln('T2');

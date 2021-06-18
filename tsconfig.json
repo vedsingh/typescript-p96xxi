@@ -3,6 +3,6 @@
     "target": "esnext",
     "noImplicitAny": true,
     "strictNullChecks": true,
-    "noEmitOnError": false
+    "noEmitOnError": true
   }
 }
